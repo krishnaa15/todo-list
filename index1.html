@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+
+<style>
+    *{
+        background-color: blanchedalmond;
+        background-size:contain;
+        font-family: cursive;
+        font-size: large;
+        font-weight: bold;
+    }
+
+    .mycontent{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+.container{
+    margin: 30px;
+    padding: 20px;
+    display: inline-block;
+    background-color: cornflowerblue;
+    border: 1.5px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.containerinput{
+    display: flex;
+    flex-direction: row;
+    background-color: cornflowerblue;
+}
+
+.container input{
+    background-color: blanchedalmond;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px 5px;
+}
+
+#btnClick{
+    color: cornflowerblue;
+    font-family: cursive;
+    font-weight: 500;
+}
+
+#btnClick:hover{
+    color: black;
+    font-weight: 700;
+}
+
+#error{
+    background-color: cornflowerblue;
+    color:black;
+    font-family: cursive;
+    padding:0px 10px;
+    font-weight: bold;
+}
+
+ul{
+    padding: 10px;
+    list-style: none;
+    background-color: cornflowerblue;
+}
+
+li{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: cornflowerblue;
+    text-decoration: none;
+    justify-content: space-between;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+li a{
+    text-decoration: none;
+    background-color: cornflowerblue;
+    color: rgb(228, 8, 8);
+    font-size: 20px;
+    font-weight: bold;
+    font-family:'Times New Roman', Times, serif;
+}
+</style>
+
+</style>
+<body>
+  <div class="mycontent">
+    <div class="container">
+      TO-DO LIST
+      <ul id="box"></ul>
+
+      <class class="containerinput">
+        <input type="text" id="name" class="input" />
+        <input
+          type="button"
+          value="Add"
+          id="btnClick"
+          class="btn"
+          onclick="addmore()"
+        />
+      </class>
+      <span id="error"></span>
+    </div>
+  </div>
+</body>
+
+<script>
+  function addmore() {
+    let name = document.getElementById("name").value;
+
+    if (name == "") {
+      document.getElementById("error").innerHTML = "Please enter a value!";
+    } 
+    else {
+      let box = document.getElementById("box");
+      let li = document.createElement("li");
+      li.textContent = name;
+
+      let a = document.createElement("a");
+      a.textContent = "x";
+      a.href = "javascript:void(0)";
+      a.className = "remove";
+      li.appendChild(a);
+
+      let pos = box.firstElementChild;
+      if (pos == null) {
+        box.appendChild(li);
+      } 
+      else {
+        box.insertBefore(li, pos);
+      }
+    }
+    document.getElementById("name").value = "";
+  }
+
+  let btn = document.querySelector("ul");
+  btn.addEventListener("click", function (e) {
+    let box = document.getElementById("box");
+    let li = e.target.parentNode;
+    box.removeChild(li);
+  });
+</script>
+</html>
